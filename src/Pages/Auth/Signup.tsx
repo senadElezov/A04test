@@ -30,15 +30,14 @@ const Signup = (props: ISignupProps) => {
 
         try {
             const response = await createUserWithEmailAndPassword(auth, formData.email, formData.password)
-            const token = await response.user.getIdToken();
-            
-            login({ email: response.user.email, token: token });
+
+            login({ email: response.user.email, token: '', auth: auth });
             push('contacts');
 
         }
         catch (error) {
             toast({
-                title: 'An Error occured',
+                title: error.message,
                 color: 'red',
                 type: 'error'
             })

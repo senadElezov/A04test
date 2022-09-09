@@ -10,6 +10,7 @@ import { store } from './redux/store';
 import { firebaseApp } from './firebaseApp';
 import { routeDefinitions } from './routes';
 import { pageRoutes } from './Pages/pageRoutes';
+import { SemanticToastContainer } from 'react-semantic-toasts';
 
 const App = () => {
 
@@ -18,18 +19,27 @@ const App = () => {
     })
 
     return <Provider store={store}>
-        <Routes
-        >
-            {
-                Object.entries(routeDefinitions)
-                    .filter(([routeName, { useInRoot }]) => useInRoot)
-                    .map(([routeName, { route }]) => {
-                        const Component = pageRoutes[routeName]
-                        return <Route key={routeName} path={route} element={<Component></Component>}></Route>
-                    })
-            }
-            <Route path='*' element={<AppMainContent></AppMainContent>}></Route>
-        </Routes>
+        <>
+            <Routes
+            >
+                {
+                    Object.entries(routeDefinitions)
+                        .filter(([routeName, { useInRoot }]) => useInRoot)
+                        .map(([routeName, { route }]) => {
+                            const Component = pageRoutes[routeName]
+                            return <Route key={routeName} path={route} element={<Component></Component>}></Route>
+                        })
+                }
+                <Route path='*' element={<AppMainContent></AppMainContent>}></Route>
+            </Routes>
+
+
+            <SemanticToastContainer
+                position='bottom-right'
+            />
+        </>
+
+
     </Provider >
 }
 

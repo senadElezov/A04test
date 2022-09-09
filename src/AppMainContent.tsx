@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
-import { SemanticToastContainer } from "react-semantic-toasts";
 import { Button, Icon, Menu } from "semantic-ui-react";
 import ABookRouter from "./ABookRouter";
-import Login from "./Pages/Auth/Login";
-import Signup from "./app/auth/Signup";
+
 import ABookSidebar from "./components/ABookSidebar/ABookSidebar";
 import useABookSelector from "./redux/Hooks/useABookSelector";
 import useUserDispatch from "./redux/Slices/userSlice";
@@ -61,9 +59,7 @@ const AppMainContent = () => {
         >
             <ABookRouter >
             </ABookRouter>
-            <SemanticToastContainer
-                position='bottom-right'
-            />
+        
         </ABookSidebar>
     </div>
 }

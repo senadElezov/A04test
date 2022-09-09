@@ -40,13 +40,20 @@ const ABookSidebar = (props: ISidebarProps) => {
             >
                 {Object.entries(routeDefinitions)
                     .filter(([route, { showInSidebar }]) => showInSidebar)
-                    .map(([route, { display,icon }]) => {
+                    .map(([route, { display, icon }]) => {
                         return <Menu.Item
-                            icon={icon}
                             onClick={() => {
                                 push(route as keyof RoutesModel)
                             }}
-                        >{display}</Menu.Item>
+                        >
+                            {
+                                icon &&
+                                <Icon
+                                    name={icon}
+                                ></Icon>
+                            }
+                            {display}
+                        </Menu.Item>
                     })}
             </Sidebar>
 

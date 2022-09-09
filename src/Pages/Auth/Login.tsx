@@ -1,5 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { isValidElement, useState } from "react";
+import { toast } from "react-semantic-toasts";
 import { Button, Segment } from "semantic-ui-react";
 import ABookForm from "../../components/ABookForm/ABookForm";
 import TextBox from "../../components/ABookForm/Components/Editors/TextBox/TextBox";
@@ -16,13 +17,22 @@ const Login = (props) => {
     const { login } = useUserDispatch();
 
     const handleSubmit = async (formData: any) => {
-        const response = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+        try {
+            const response = await signInWithEmailAndPassword(auth, formData.email, formData.password);
 
-        login({
-            email: response.user.email,
-            token: await response.user.getIdToken(),
-            auth: auth
-        })
+            login({
+                email: response.user.email,
+                token: await response.user.getIdToken(),
+                auth: auth
+            })
+
+        }
+        catch (error) {
+            toast({
+                title: error.message,
+                type: 'error'
+            })
+        }
 
         push('contacts')
     }
@@ -32,11 +42,11 @@ const Login = (props) => {
 
     ><Segment
     ><ABookForm
-        onSubmit={({ formData,isValid }) => {
-            if(!isValid) {
+        onSubmit={({ formData, isValid }) => {
+            if (!isValid) {
                 return;
             }
-            
+
             handleSubmit(formData);
         }}
         submitText='Login'
