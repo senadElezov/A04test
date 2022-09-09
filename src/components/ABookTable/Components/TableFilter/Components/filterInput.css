@@ -1,0 +1,17 @@
+.filter-input {
+    width: 100%;
+}
+
+.filter-select {
+
+    border-right: none;
+
+    border-radius: 5px 0px 0px 5px;
+}
+
+.filter-inner-select {
+
+    border-left: none;
+
+    border-radius: 0px 5px 5px 0px;
+}
